@@ -13,9 +13,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header>Career Shelf</header>
+        {/* <header>Career Shelf</header> */}
         {children}
-        <footer>this is footer</footer>
+        {/* <footer>this is footer</footer> */}
       </body>
     </html>
   );
