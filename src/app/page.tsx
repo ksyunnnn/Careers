@@ -42,18 +42,7 @@ const Page = () => {
             <Separator className="my-4" />
             <div className="relative">
               <ScrollArea>
-                <div className="flex space-x-4 pb-4">
-                  {/* {listenNowAlbums.map((album) => (
-                              <AlbumArtwork
-                                key={album.name}
-                                album={album}
-                                className="w-[250px]"
-                                aspectRatio="portrait"
-                                width={250}
-                                height={330}
-                              />
-                            ))} */}
-                </div>
+                <div className="flex space-x-4 pb-4"></div>
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
             </div>
