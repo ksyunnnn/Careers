@@ -1,0 +1,1 @@
+drop policy "Public profiles are viewable by everyone." on profiles
