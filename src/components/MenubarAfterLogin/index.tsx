@@ -52,7 +52,10 @@ export const MenubarAfterLogin = async ({ sessionUserId }: Props) => {
         <MenubarSeparator />
         <MenubarItem inset>Manage Family...</MenubarItem>
         <MenubarSeparator />
-        <MenubarItem inset>Add Account...</MenubarItem>
+        {/**
+         * @todo -- Intercepting Routesを使ってみたい: https://zenn.dev/chot/articles/88ee3dc4697e57
+         */}
+        <MenubarItem inset>Logout</MenubarItem>
       </MenubarContent>
     </MenubarMenu>
   );
