@@ -11,9 +11,9 @@ import {
   MenubarTrigger,
 } from '@/components/ui/menubar';
 import { Session } from '@supabase/supabase-js';
-import Link from 'next/link';
-import { Button, buttonVariants } from './ui/button';
+import { Button } from './ui/button';
 import { DialogForLogin } from './DialogForLogin';
+import { MenubarAfterLogin } from './MenubarAfterLogin';
 
 type Props = {
   session: Session | null;
@@ -37,24 +37,7 @@ export const GlobalHeader = ({ session }: Props) => {
         </MenubarContent>
       </MenubarMenu>
 
-      {session && (
-        <MenubarMenu>
-          <MenubarTrigger className="hidden md:block">Account: {session.user.email}</MenubarTrigger>
-          <MenubarContent forceMount>
-            <MenubarLabel inset>Switch Account</MenubarLabel>
-            <MenubarSeparator />
-            <MenubarRadioGroup value="benoit">
-              <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-              <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-              <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-            </MenubarRadioGroup>
-            <MenubarSeparator />
-            <MenubarItem inset>Manage Family...</MenubarItem>
-            <MenubarSeparator />
-            <MenubarItem inset>Add Account...</MenubarItem>
-          </MenubarContent>
-        </MenubarMenu>
-      )}
+      {session && <MenubarAfterLogin sessionUserId={session.user.id} />}
       {!session && (
         <DialogForLogin>
           <Button variant="ghost" size="sm">
