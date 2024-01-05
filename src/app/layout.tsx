@@ -13,7 +13,13 @@ export const metadata: Metadata = {
   description: 'Career Shelf',
 };
 
-const Layout = async ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({
+  children,
+  modal,
+}: {
+  children: React.ReactNode;
+  modal: React.ReactNode;
+}) => {
   const supabase = createServerComponentSupabase();
 
   const session = await getSession({
@@ -31,6 +37,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
               <div className="grid lg:grid-cols-5">
                 <Sidebar className="hidden lg:block" />
                 {children}
+                {modal}
               </div>
             </div>
           </div>

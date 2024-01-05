@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { PlusCircledIcon } from '@radix-ui/react-icons';
 
 import { Button } from '@/components/ui/button';
@@ -7,11 +6,6 @@ import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { EmptyPlaceholder } from '@/components/EmptyPlaceholder';
-
-export const metadata: Metadata = {
-  title: 'Career Shelf',
-  description: 'Career Shelf',
-};
 
 const Page = () => {
   return (
