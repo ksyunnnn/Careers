@@ -7,8 +7,8 @@ import { GlobalHeaderAfterLogin } from '@/components/GlobalHeaderAfterLogin';
 import { Sidebar } from '@/components/Sidebar';
 import { DialogForLogin } from '@/components/DialogForLogin';
 import { Button } from '@/components/ui/button';
-import { EmptyPlaceholder } from '@/components/EmptyPlaceholder';
 import { DescribeNeedLogin } from '@/components/DescribeNeedLogin';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -63,6 +63,7 @@ const Layout = async ({
           </div>
         </div>
         {modal}
+        <Toaster />
       </body>
     </html>
   );

@@ -7,6 +7,7 @@ import { FormValues } from './types';
 import { logger } from '@/lib/logger';
 import { signInWithPassword } from '@/lib/session';
 import { createSupabaseClient } from '@/lib/supabaseClient';
+import { useToast } from '../ui/use-toast';
 
 const formId = 'dialog-login-form';
 
@@ -17,6 +18,7 @@ type ReturnType = UseFormReturn<FormValues> & {
 
 export const useDialogForLogin = (): ReturnType => {
   const router = useRouter();
+  const { toast } = useToast();
 
   const supabase = createSupabaseClient();
 
@@ -32,6 +34,11 @@ export const useDialogForLogin = (): ReturnType => {
       logger.error('handleSignIn', { error });
       return;
     }
+    toast({
+      title: 'Welcome back🎉',
+      description: 'You have successfully logged in.',
+    });
+
     router.refresh();
   });
 

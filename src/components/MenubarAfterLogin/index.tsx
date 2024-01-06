@@ -47,7 +47,7 @@ export const MenubarAfterLogin = async ({ sessionUserId }: Props) => {
         <MenubarItem inset>Account Settings</MenubarItem>
         <MenubarSeparator />
 
-        <MenubarItem inset asChild className="w-full">
+        <MenubarItem asChild className="w-full">
           <ButtonForLogout />
         </MenubarItem>
       </MenubarContent>
