@@ -1,9 +1,5 @@
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { SupabaseClient } from '@supabase/supabase-js';
-
 import type { Database } from '@/types/supabase';
-
-export const createClientComponentSupabase = () => createClientComponentClient<Database>();
 
 export const signInWithPassword = async ({
   client,

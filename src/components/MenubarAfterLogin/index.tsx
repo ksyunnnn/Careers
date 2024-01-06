@@ -9,16 +9,18 @@ import {
   MenubarTrigger,
 } from '@/components/ui/menubar';
 import { Empty } from '../Empty';
-import { createServerComponentSupabase } from '@/lib/supabaseServer';
+import { createSupabaseServerClient } from '@/lib/supabaseServerClient';
 import { createProfilesQuery } from '@/query/createProfilesQuery';
 import { logger } from '@/lib/logger';
+import { Button } from '../ui/button';
+import { ButtonForLogout } from '../ButtonForLogout';
 
 type Props = {
   sessionUserId: string;
 };
 
 export const MenubarAfterLogin = async ({ sessionUserId }: Props) => {
-  const supabase = createServerComponentSupabase();
+  const supabase = createSupabaseServerClient();
   const query = createProfilesQuery({ client: supabase });
   const { data: profile, error } = await query.eq('id', sessionUserId).single();
   if (error) logger.error(error);
@@ -42,20 +44,12 @@ export const MenubarAfterLogin = async ({ sessionUserId }: Props) => {
         </div>
       </MenubarTrigger>
       <MenubarContent forceMount>
-        <MenubarLabel inset>Switch Account</MenubarLabel>
+        <MenubarItem inset>Account Settings</MenubarItem>
         <MenubarSeparator />
-        <MenubarRadioGroup value="benoit">
-          <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-          <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-          <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-        </MenubarRadioGroup>
-        <MenubarSeparator />
-        <MenubarItem inset>Manage Family...</MenubarItem>
-        <MenubarSeparator />
-        {/**
-         * @todo -- Intercepting Routesを使ってみたい: https://zenn.dev/chot/articles/88ee3dc4697e57
-         */}
-        <MenubarItem inset>Logout</MenubarItem>
+
+        <MenubarItem inset asChild className="w-full">
+          <ButtonForLogout />
+        </MenubarItem>
       </MenubarContent>
     </MenubarMenu>
   );

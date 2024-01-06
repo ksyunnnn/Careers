@@ -5,7 +5,8 @@ import { formValuesSchema } from './schema';
 import { FormValues } from './types';
 
 import { logger } from '@/lib/logger';
-import { createClientComponentSupabase, signInWithPassword, signOut } from '@/lib/supabase';
+import { signInWithPassword } from '@/lib/session';
+import { createSupabaseClient } from '@/lib/supabaseClient';
 
 const formId = 'dialog-login-form';
 
@@ -17,7 +18,7 @@ type ReturnType = UseFormReturn<FormValues> & {
 export const useDialogForLogin = (): ReturnType => {
   const router = useRouter();
 
-  const supabase = createClientComponentSupabase();
+  const supabase = createSupabaseClient();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formValuesSchema),

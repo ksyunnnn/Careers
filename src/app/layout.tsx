@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { createServerComponentSupabase } from '@/lib/supabaseServer';
-import { getSession } from '@/lib/supabase';
-import { GlobalHeader } from '@/components/GlobalHeader';
+import { createSupabaseServerClient } from '@/lib/supabaseServerClient';
+import { getSession } from '@/lib/session';
+import { GlobalHeaderAfterLogin } from '@/components/GlobalHeaderAfterLogin';
 import { Sidebar } from '@/components/Sidebar';
+import { DialogForLogin } from '@/components/DialogForLogin';
+import { Button } from '@/components/ui/button';
+import { EmptyPlaceholder } from '@/components/EmptyPlaceholder';
+import { DescribeNeedLogin } from '@/components/DescribeNeedLogin';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,7 +24,7 @@ const Layout = async ({
   children: React.ReactNode;
   modal: React.ReactNode;
 }) => {
-  const supabase = createServerComponentSupabase();
+  const supabase = createSupabaseServerClient();
 
   const session = await getSession({
     client: supabase,
@@ -31,17 +35,34 @@ const Layout = async ({
       <body className={inter.className}>
         <div className="md:hidden">Mobile is not supported now 🙏</div>
         <div className="hidden md:block">
-          <GlobalHeader session={session} />
+          {session && <GlobalHeaderAfterLogin session={session} />}
+          {!session && (
+            <div className="px-2 lg:px-4 min-h-header-height flex justify-between items-center bg-neutral-50">
+              <div className="font-bold">Career Shelf</div>
+              <DialogForLogin>
+                <Button variant="ghost" size="sm">
+                  Login
+                </Button>
+              </DialogForLogin>
+            </div>
+          )}
           <div className="border-t">
             <div className="bg-background">
-              <div className="grid lg:grid-cols-5">
-                <Sidebar className="hidden lg:block" />
-                {children}
-                {modal}
-              </div>
+              {session && (
+                <div className="grid lg:grid-cols-5">
+                  <Sidebar className="hidden lg:block" />
+                  {children}
+                </div>
+              )}
+              {!session && (
+                <div>
+                  <DescribeNeedLogin />
+                </div>
+              )}
             </div>
           </div>
         </div>
+        {modal}
       </body>
     </html>
   );

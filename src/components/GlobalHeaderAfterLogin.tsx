@@ -2,24 +2,20 @@ import {
   Menubar,
   MenubarContent,
   MenubarItem,
-  MenubarLabel,
   MenubarMenu,
-  MenubarRadioGroup,
-  MenubarRadioItem,
   MenubarSeparator,
   MenubarShortcut,
   MenubarTrigger,
 } from '@/components/ui/menubar';
 import { Session } from '@supabase/supabase-js';
-import { Button } from './ui/button';
-import { DialogForLogin } from './DialogForLogin';
 import { MenubarAfterLogin } from './MenubarAfterLogin';
+import Link from 'next/link';
 
 type Props = {
-  session: Session | null;
+  session: Session;
 };
 
-export const GlobalHeader = ({ session }: Props) => {
+export const GlobalHeaderAfterLogin = ({ session }: Props) => {
   return (
     <Menubar className="rounded-none border-b border-none px-2 lg:px-4 min-h-header-height flex justify-between">
       <MenubarMenu>
@@ -27,8 +23,8 @@ export const GlobalHeader = ({ session }: Props) => {
         <MenubarContent>
           <MenubarItem>About Career Shelf</MenubarItem>
           <MenubarSeparator />
-          <MenubarItem>
-            Preferences... <MenubarShortcut>⌘,</MenubarShortcut>
+          <MenubarItem asChild>
+            <Link href={'/'}>Top</Link>
           </MenubarItem>
           <MenubarSeparator />
           <MenubarItem>
@@ -37,14 +33,7 @@ export const GlobalHeader = ({ session }: Props) => {
         </MenubarContent>
       </MenubarMenu>
 
-      {session && <MenubarAfterLogin sessionUserId={session.user.id} />}
-      {!session && (
-        <DialogForLogin>
-          <Button variant="ghost" size="sm">
-            Login
-          </Button>
-        </DialogForLogin>
-      )}
+      <MenubarAfterLogin sessionUserId={session.user.id} />
     </Menubar>
   );
 };

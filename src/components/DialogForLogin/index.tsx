@@ -11,7 +11,6 @@ import {
   Form,
   FormControl,
   FormDescription,
-  FormField,
   FormItem,
   FormLabel,
   FormMessage,
@@ -19,6 +18,7 @@ import {
 import { useDialogForLogin } from './hooks';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
+import * as Icons from '@/Icons';
 
 type Props =
   | {
@@ -37,11 +37,8 @@ export const DialogForLogin = (props: Props) => {
       <DialogTrigger asChild>{props.children || props.trigger}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your account and remove your
-            data from our servers.
-          </DialogDescription>
+          <DialogTitle>Join today 🙌</DialogTitle>
+          <DialogDescription>Blah blah</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={onSubmit} className="space-y-8">
@@ -50,18 +47,19 @@ export const DialogForLogin = (props: Props) => {
               <FormControl>
                 <Input placeholder="email" {...form.register('email')} />
               </FormControl>
-              <FormDescription>This is your public display name.</FormDescription>
               <FormMessage>{form.formState.errors.email?.message}</FormMessage>
             </FormItem>
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="password" {...form.register('password')} />
+                <Input placeholder="password" type="password" {...form.register('password')} />
               </FormControl>
-              <FormDescription>This is your public display name.</FormDescription>
               <FormMessage>{form.formState.errors.password?.message}</FormMessage>
             </FormItem>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">
+              <Icons.SignIn className="mr-2 h-4 w-4" />
+              Login
+            </Button>
           </form>
         </Form>
       </DialogContent>

@@ -4,7 +4,7 @@ import { cache } from 'react';
 
 import type { Database } from '@/types/supabase';
 
-export const createServerComponentSupabase = cache(() => {
+export const createSupabaseServerClient = cache(() => {
   const cookieStore = cookies();
   return createServerComponentClient<Database>({ cookies: () => cookieStore });
 });

@@ -1,9 +1,8 @@
-import { PlusCircledIcon } from '@radix-ui/react-icons';
-
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import * as Icons from '@/Icons';
 
 import { EmptyPlaceholder } from '@/components/EmptyPlaceholder';
 
@@ -21,7 +20,7 @@ const Page = () => {
             </TabsList>
             <div className="ml-auto mr-4">
               <Button>
-                <PlusCircledIcon className="mr-2 h-4 w-4" />
+                <Icons.PlusCircle className="mr-2 h-4 w-4" />
                 Add Career
               </Button>
             </div>
