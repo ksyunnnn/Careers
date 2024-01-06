@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import * as Icons from '@/Icons';
 
 import { EmptyPlaceholder } from '@/components/EmptyPlaceholder';
+import Link from 'next/link';
 
 const Page = () => {
   return (
@@ -19,9 +20,11 @@ const Page = () => {
               <TabsTrigger value="podcasts">Folder</TabsTrigger>
             </TabsList>
             <div className="ml-auto mr-4">
-              <Button>
-                <Icons.PlusCircle className="mr-2 h-4 w-4" />
-                Add Career
+              <Button asChild>
+                <Link href="/career/new">
+                  <Icons.PlusCircle className="mr-2 h-4 w-4" />
+                  Add Career
+                </Link>
               </Button>
             </div>
           </div>

@@ -30,14 +30,9 @@ export const Modal = ({ children }: Props) => {
       <DialogContent
         onEscapeKeyDown={(e) => routerBack(e)}
         onPointerDownOutside={(e) => routerBack(e)}
+        className="max-w-[80vw]"
       >
-        <DialogHeader>
-          <DialogTitle>Photo Detail</DialogTitle>
-        </DialogHeader>
         {children}
-        <DialogFooter>
-          <Button variant="outline">Expand</Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
