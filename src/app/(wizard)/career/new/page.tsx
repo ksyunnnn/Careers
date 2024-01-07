@@ -13,7 +13,9 @@ export const CareerPage = () => {
   return (
     <div className="hidden h-[100vh] flex-col md:flex">
       <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
-        <Link href="/">Get back</Link>
+        <Button asChild variant="secondary" className="mr-2">
+          <Link href="/">back</Link>
+        </Button>
         <h2 className="text-lg font-semibold">Playground</h2>
         <div className="ml-auto flex w-full space-x-2 sm:justify-end">
           <PresetSelector />
