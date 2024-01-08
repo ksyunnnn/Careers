@@ -1,25 +1,35 @@
+/** @fixme - temporary */
+'use client';
+import { useEditCareerForm } from '@/components/EditCareerForm/hooks';
 import { PresetActions } from '@/components/PresetActions';
 import { PresetSelector } from '@/components/PresetSelector';
 import { PresetShare } from '@/components/PresetShare';
+import { Textviewer } from '@/components/Textviewer';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
-import * as Icons from '@/Icons';
 import Link from 'next/link';
+import matter from 'gray-matter';
 
+/** @fixme - temporary */
 export const CareerPage = () => {
+  const { register, watch } = useEditCareerForm();
+  const body = watch('body');
+  const { content, data } = matter(body || '');
+
   return (
     <div className="hidden h-[100vh] flex-col md:flex">
       <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
-        <Link href="/">Get back</Link>
-        <h2 className="text-lg font-semibold">Playground</h2>
+        <Button asChild variant="secondary" className="mr-2">
+          <Link href="/">back</Link>
+        </Button>
+        <h2 className="text-lg font-semibold">Edit</h2>
         <div className="ml-auto flex w-full space-x-2 sm:justify-end">
           <PresetSelector />
           <Button variant="secondary">Save</Button>
           <div className="hidden space-x-2 md:flex">
-            <Button variant="secondary">View code</Button>
             <PresetShare />
           </div>
           <PresetActions />
@@ -92,6 +102,19 @@ export const CareerPage = () => {
                   </TabsTrigger>
                 </TabsList>
               </div>
+              <div className="grid gap-2">
+                <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  Meta
+                </span>
+                <div className="bg-muted rounded-md p-2 grid gap-4">
+                  {Object.keys(data).map((key) => (
+                    <div key={key}>
+                      <div className="capitalize text-xs font-bold">{key}</div>
+                      <div className="text-sm">{data[key]}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
               {/* <ModelSelector types={types} models={models} />
               <TemperatureSelector defaultValue={[0.56]} />
               <MaxLengthSelector defaultValue={[256]} />
@@ -103,6 +126,7 @@ export const CareerPage = () => {
                   <Textarea
                     placeholder="Write a tagline for an ice cream shop"
                     className="min-h-[400px] flex-1 p-4 md:min-h-[700px] lg:min-h-[700px]"
+                    {...register('body')}
                   />
                 </div>
               </TabsContent>
@@ -112,8 +136,9 @@ export const CareerPage = () => {
                     <Textarea
                       placeholder="We're writing to [inset]. Congrats from OpenAI!"
                       className="h-full min-h-[300px] lg:min-h-[700px] xl:min-h-[700px]"
+                      {...register('body')}
                     />
-                    <div className="rounded-md border bg-muted"></div>
+                    <Textviewer className="rounded-md border bg-muted">{content}</Textviewer>
                   </div>
                 </div>
               </TabsContent>
@@ -127,6 +152,7 @@ export const CareerPage = () => {
                           id="input"
                           placeholder="We is going to the market."
                           className="flex-1 lg:min-h-[580px]"
+                          {...register('body')}
                         />
                       </div>
                       <div className="flex flex-col space-y-2">
