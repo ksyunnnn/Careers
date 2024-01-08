@@ -24,6 +24,12 @@ export const useEditCareerForm = (careerId?: string): ReturnType => {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formValuesSchema),
+    defaultValues: {
+      body: `---
+title: Front-End Web Developer
+skils: Nextjs, React, TypeScript, TailwindCSS
+---`,
+    },
   });
 
   const { handleSubmit } = form;
