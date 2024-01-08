@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "start:supabase": "npx supabase start",
+    "stop:supabase": "npx supabase stop",
     "build": "next build",
     "start": "next start",
     "lint": "next lint && npm run check-type",

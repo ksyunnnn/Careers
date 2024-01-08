@@ -1,15 +1,21 @@
+/** @fixme - temporary */
+'use client';
+import { useEditCareerForm } from '@/components/EditCareerForm/hooks';
 import { PresetActions } from '@/components/PresetActions';
 import { PresetSelector } from '@/components/PresetSelector';
 import { PresetShare } from '@/components/PresetShare';
+import { Textviewer } from '@/components/Textviewer';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
-import * as Icons from '@/Icons';
 import Link from 'next/link';
 
+/** @fixme - temporary */
 export const CareerPage = () => {
+  const { register, watch } = useEditCareerForm();
+  const body = watch('body');
   return (
     <div className="hidden h-[100vh] flex-col md:flex">
       <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
@@ -105,6 +111,7 @@ export const CareerPage = () => {
                   <Textarea
                     placeholder="Write a tagline for an ice cream shop"
                     className="min-h-[400px] flex-1 p-4 md:min-h-[700px] lg:min-h-[700px]"
+                    {...register('body')}
                   />
                 </div>
               </TabsContent>
@@ -114,8 +121,9 @@ export const CareerPage = () => {
                     <Textarea
                       placeholder="We're writing to [inset]. Congrats from OpenAI!"
                       className="h-full min-h-[300px] lg:min-h-[700px] xl:min-h-[700px]"
+                      {...register('body')}
                     />
-                    <div className="rounded-md border bg-muted"></div>
+                    <Textviewer className="rounded-md border bg-muted">{body}</Textviewer>
                   </div>
                 </div>
               </TabsContent>
@@ -129,6 +137,7 @@ export const CareerPage = () => {
                           id="input"
                           placeholder="We is going to the market."
                           className="flex-1 lg:min-h-[580px]"
+                          {...register('body')}
                         />
                       </div>
                       <div className="flex flex-col space-y-2">

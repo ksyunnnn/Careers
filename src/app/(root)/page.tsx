@@ -21,7 +21,7 @@ const Page = () => {
             </TabsList>
             <div className="ml-auto mr-4">
               <Button asChild>
-                <Link href="/career/new">
+                <Link href="/new">
                   <Icons.PlusCircle className="mr-2 h-4 w-4" />
                   Add Career
                 </Link>
