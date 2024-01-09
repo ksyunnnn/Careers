@@ -1,10 +1,12 @@
-import CareerPage from '@/app/(wizard)/new/page';
 import { Modal } from '../(.)photos/[id]/modal';
+import { EditCareerForm } from '@/components/EditCareerForm';
 
-const Page = ({ params: { id: photoId } }: { params: { id: string } }) => {
+const Page = () => {
   return (
     <Modal>
-      <CareerPage />
+      <div className="h-[92vh]">
+        <EditCareerForm parallel="modal" />
+      </div>
     </Modal>
   );
 };
