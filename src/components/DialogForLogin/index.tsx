@@ -11,7 +11,7 @@ import { Form, FormControl, FormItem, FormLabel, FormMessage } from '@/component
 import { useDialogForLogin } from './hooks';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import * as Icons from '@/icons';
+import * as Icons from '@/iconsUp';
 
 type Props =
   | {

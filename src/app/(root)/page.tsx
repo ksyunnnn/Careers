@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import * as Icons from '@/icons';
+import * as Icons from '@/iconsUp';
 
 import { EmptyPlaceholder } from '@/components/EmptyPlaceholder';
 import Link from 'next/link';

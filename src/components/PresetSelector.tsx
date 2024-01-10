@@ -13,7 +13,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 import { Button } from '@/components/ui/button';
-import * as Icons from '@/icons';
+import * as Icons from '@/iconsUp';
 
 interface Preset {
   id: string;

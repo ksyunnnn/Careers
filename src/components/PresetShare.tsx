@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 
-import * as Icons from '@/icons';
+import * as Icons from '@/iconsUp';
 
 export const PresetShare = () => {
   return (
