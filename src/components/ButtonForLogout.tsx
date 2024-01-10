@@ -5,7 +5,7 @@ import { signOut } from '@/lib/session';
 import { useRouter } from 'next/navigation';
 import { forwardRef } from 'react';
 import { useToast } from './ui/use-toast';
-import * as Icons from '@/Icons';
+import * as Icons from '@/icons';
 
 export const ButtonForLogout = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const supabase = createSupabaseClient();

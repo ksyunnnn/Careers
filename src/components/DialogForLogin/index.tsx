@@ -7,18 +7,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useDialogForLogin } from './hooks';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import * as Icons from '@/Icons';
+import * as Icons from '@/icons';
 
 type Props =
   | {

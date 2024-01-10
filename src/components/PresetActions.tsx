@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 
-import * as Icons from '@/Icons';
+import * as Icons from '@/icons';
 import { useState } from 'react';
 import { toast } from '@/components/ui/use-toast';
 
