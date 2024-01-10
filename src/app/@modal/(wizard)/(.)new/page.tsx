@@ -1,4 +1,4 @@
-import { Modal } from '../(.)photos/[id]/modal';
+import { Modal } from '../../(.)photos/[id]/modal';
 import { EditCareerForm } from '@/components/EditCareerForm';
 
 const Page = () => {
