@@ -14,6 +14,7 @@ import { createProfilesQuery } from '@/query/createProfilesQuery';
 import { logger } from '@/lib/logger';
 import { Button } from '../ui/button';
 import { ButtonForLogout } from '../ButtonForLogout';
+import Link from 'next/link';
 
 type Props = {
   sessionUserId: string;
@@ -44,7 +45,9 @@ export const MenubarAfterLogin = async ({ sessionUserId }: Props) => {
         </div>
       </MenubarTrigger>
       <MenubarContent forceMount>
-        <MenubarItem inset>Account Settings</MenubarItem>
+        <MenubarItem inset asChild>
+          <Link href="/settings/account">Account Settings</Link>
+        </MenubarItem>
         <MenubarSeparator />
 
         <MenubarItem asChild className="w-full">
