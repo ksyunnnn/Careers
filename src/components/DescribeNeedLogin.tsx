@@ -1,4 +1,4 @@
-import { DialogForLogin } from './DialogForLogin';
+import { DialogForLogin } from './LoginForm';
 import { Button } from './ui/button';
 import * as Icons from '@/icons';
 

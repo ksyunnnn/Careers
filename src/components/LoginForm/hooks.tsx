@@ -32,7 +32,7 @@ More details: `}
   </span>
 );
 
-export const useDialogForLogin = (): ReturnType => {
+export const useLoginForm = (): ReturnType => {
   const router = useRouter();
   const { toast } = useToast();
   const pathname = usePathname() as Route;

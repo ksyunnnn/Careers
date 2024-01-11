@@ -1,4 +1,4 @@
-import { DialogForLogin } from '@/components/DialogForLogin';
+import { DialogForLogin } from '@/components/LoginForm';
 import { Button } from '@/components/ui/button';
 import { DescribeNeedLogin } from '@/components/DescribeNeedLogin';
 
