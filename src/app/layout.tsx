@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { createSupabaseServerClient } from '@/lib/supabaseServerClient';
-import { getSession } from '@/lib/session';
 import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -19,12 +17,6 @@ const Layout = async ({
   children: React.ReactNode;
   modal: React.ReactNode;
 }) => {
-  const supabase = createSupabaseServerClient();
-
-  const session = await getSession({
-    client: supabase,
-  });
-
   return (
     <html lang="en">
       <body className={inter.className}>

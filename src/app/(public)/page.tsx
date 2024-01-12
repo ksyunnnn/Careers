@@ -2,8 +2,20 @@ import { DialogForLogin } from '@/components/DialogForLogin';
 import { SignupForm } from '@/components/SignupForm';
 import { Button } from '@/components/ui/button';
 import * as Icons from '@/icons';
+import { createSupabaseServerClient } from '@/lib/supabaseServerClient';
+import { getSession } from '@/lib/session';
+import { redirect } from 'next/navigation';
 
-const Page = () => {
+const Page = async () => {
+  const supabase = createSupabaseServerClient();
+  const session = await getSession({
+    client: supabase,
+  });
+
+  if (session) {
+    redirect('/dashboard');
+  }
+
   return (
     <div className="bg-background grid place-content-center min-h-content-min-height">
       <div className="min-w-80 space-y-6 -mt-16">
