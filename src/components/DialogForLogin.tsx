@@ -24,7 +24,7 @@ export const DialogForLogin = (props: Props) => {
       <DialogTrigger asChild>{props.children || props.trigger}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Join today 🙌</DialogTitle>
+          <DialogTitle>Hello again 🙌</DialogTitle>
           <DialogDescription>Blah blah</DialogDescription>
         </DialogHeader>
         <LoginForm />
