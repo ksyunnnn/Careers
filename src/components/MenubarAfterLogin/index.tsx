@@ -11,12 +11,14 @@ import { createProfilesQuery } from '@/query/createProfilesQuery';
 import { logger } from '@/lib/logger';
 import { ButtonForLogout } from '../ButtonForLogout';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 type Props = {
   sessionUserId: string;
+  needRedirect?: boolean;
 };
 
-export const MenubarAfterLogin = async ({ sessionUserId }: Props) => {
+export const MenubarAfterLogin = async ({ sessionUserId, needRedirect = true }: Props) => {
   const supabase = createSupabaseServerClient();
   const query = createProfilesQuery({ client: supabase });
   const { data: profile, error } = await query.eq('id', sessionUserId).single();
@@ -27,6 +29,10 @@ export const MenubarAfterLogin = async ({ sessionUserId }: Props) => {
   }
 
   const { email, user_name } = profile;
+
+  if (!user_name && needRedirect) {
+    redirect('/settings/account');
+  }
 
   return (
     <MenubarMenu>
