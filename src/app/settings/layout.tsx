@@ -1,10 +1,10 @@
 import { createSupabaseServerClient } from '@/lib/supabaseServerClient';
 import { getSession } from '@/lib/session';
-import { Sidebar } from '@/components/Sidebar';
 import { EmptySessionPage } from '@/components/EmptySessionPage';
 import { MenubarLogo } from '@/components/MenubarLogo';
 import { Menubar } from '@/components/ui/menubar';
 import { MenubarAfterLogin } from '@/components/MenubarAfterLogin';
+import { SidebarInSettings } from '@/components/SidebarInSettings';
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const supabase = createSupabaseServerClient();
@@ -25,8 +25,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
       <div className="border-t">
         <div className="bg-background">
           <div className="grid lg:grid-cols-5">
-            {/** @todo need fix */}
-            <Sidebar className="hidden lg:block" />
+            <SidebarInSettings className="hidden lg:block" />
             {children}
           </div>
         </div>
