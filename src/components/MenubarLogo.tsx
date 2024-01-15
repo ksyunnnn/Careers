@@ -17,7 +17,7 @@ export const MenubarLogo = () => {
         <MenubarItem>About Career Shelf</MenubarItem>
         <MenubarSeparator />
         <MenubarItem asChild>
-          <Link href={'/'}>Top</Link>
+          <Link href={'/dashboard'}>Dashboard</Link>
         </MenubarItem>
         <MenubarSeparator />
         <MenubarItem>

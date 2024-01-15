@@ -1,5 +1,5 @@
 import { z } from 'zod';
 
 export const formValuesSchema = z.object({
-  displayName: z.string().nonempty({ message: 'Display name is required' }),
+  user_name: z.string().min(1, { message: 'Display name is required' }),
 });

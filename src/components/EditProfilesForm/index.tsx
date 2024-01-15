@@ -12,11 +12,11 @@ export const EditProfilesForm = () => {
         <Form {...form}>
           <form onSubmit={onSubmit} className="space-y-8">
             <FormItem>
-              <FormLabel>Display Name</FormLabel>
+              <FormLabel>User Name</FormLabel>
               <FormControl>
-                <Input placeholder="synske" {...form.register('displayName')} />
+                <Input placeholder="synske" {...form.register('user_name')} />
               </FormControl>
-              <FormMessage>{form.formState.errors.displayName?.message}</FormMessage>
+              <FormMessage>{form.formState.errors.user_name?.message}</FormMessage>
             </FormItem>
 
             <Button type="submit">Save</Button>
