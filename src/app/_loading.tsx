@@ -1,5 +1,8 @@
 import { Skeleton } from '@/components/ui/skeleton';
 
+/**
+ * WIP
+ */
 const Loading = () => {
   return (
     <>
