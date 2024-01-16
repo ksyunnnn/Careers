@@ -6,6 +6,8 @@ import { createSupabaseServerClient } from '@/lib/supabaseServerClient';
 import { getSession } from '@/lib/session';
 import { redirect } from 'next/navigation';
 
+export const runtime = 'edge';
+
 const Page = async () => {
   const supabase = createSupabaseServerClient();
   const session = await getSession({

@@ -9,6 +9,8 @@ type PageContext = {
   };
 };
 
+export const runtime = 'edge';
+
 const Page = ({ searchParams }: PageContext) => {
   const { code } = searchParams;
   if (!code) notFound();
