@@ -2,6 +2,8 @@ import { createSupabaseServerClient } from '@/lib/supabaseServerClient';
 import { getSession } from '@/lib/session';
 import { EmptySessionPage } from '@/components/EmptySessionPage';
 
+export const runtime = 'edge';
+
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const supabase = createSupabaseServerClient();
 
