@@ -1,6 +1,8 @@
 import { Modal } from '../../(.)photos/[id]/modal';
 import { EditCareerForm } from '@/components/EditCareerForm';
 
+export const runtime = 'edge';
+
 const Page = () => {
   return (
     <Modal>
