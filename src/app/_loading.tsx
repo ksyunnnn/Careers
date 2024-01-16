@@ -1,7 +1,7 @@
 import { Skeleton } from '@/components/ui/skeleton';
 
 /**
- * WIP
+ * WIP -- it might be better to use doc as a reference because of pallarel routes.
  */
 const Loading = () => {
   return (
