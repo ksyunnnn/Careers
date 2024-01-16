@@ -22,8 +22,10 @@ const Layout = async ({
     <html lang="en">
       <body className={inter.className}>
         <div className="md:hidden">Mobile is not supported now 🙏</div>
-        <div className="hidden md:block">{children}</div>
-        {modal}
+        <div className="hidden md:block">
+          {children}
+          {modal}
+        </div>
         <Toaster />
         <SpeedInsights />
       </body>
