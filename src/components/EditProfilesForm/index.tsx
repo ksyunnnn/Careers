@@ -13,7 +13,7 @@ export const EditProfilesForm = () => {
           <FormItem>
             <FormLabel>User Name</FormLabel>
             <FormControl>
-              <Input placeholder="synsk" {...form.register('user_name')} />
+              <Input placeholder="type your favorite name" {...form.register('user_name')} />
             </FormControl>
             <FormMessage>{form.formState.errors.user_name?.message}</FormMessage>
           </FormItem>

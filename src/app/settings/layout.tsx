@@ -1,7 +1,6 @@
 import { createSupabaseServerClient } from '@/lib/supabaseServerClient';
 import { getSession } from '@/lib/session';
 import { EmptySessionPage } from '@/components/EmptySessionPage';
-import { MenubarLogo } from '@/components/MenubarLogo';
 import { Menubar } from '@/components/ui/menubar';
 import { MenubarAfterLogin } from '@/components/MenubarAfterLogin';
 import { SidebarInSettings } from '@/components/SidebarInSettings';
