@@ -25,7 +25,7 @@ export const EditCareerForm = ({ careerId, parallel = 'default' }: Props) => {
       <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
         {parallel === 'default' && (
           <Button asChild variant="secondary" className="mr-2">
-            <Link href="/">back</Link>
+            <Link href="/dashboard">back</Link>
           </Button>
         )}
         <h2 className="text-lg font-semibold">Edit</h2>
