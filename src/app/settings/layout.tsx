@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import * as Icons from '@/icons';
 import Link from 'next/link';
 
+export const runtime = 'edge';
+
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const supabase = createSupabaseServerClient();
 
