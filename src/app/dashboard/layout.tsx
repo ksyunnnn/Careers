@@ -6,6 +6,8 @@ import { Menubar } from '@/components/ui/menubar';
 import { MenubarLogo } from '@/components/MenubarLogo';
 import { MenubarAfterLogin } from '@/components/MenubarAfterLogin';
 
+export const runtime = 'edge';
+
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const supabase = createSupabaseServerClient();
 

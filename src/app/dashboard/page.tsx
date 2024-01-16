@@ -7,6 +7,8 @@ import * as Icons from '@/icons';
 import { EmptyPlaceholder } from '@/components/EmptyPlaceholder';
 import Link from 'next/link';
 
+export const runtime = 'edge';
+
 const Page = () => {
   return (
     <div className="col-span-3 lg:col-span-4 lg:border-l">
