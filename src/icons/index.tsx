@@ -12,3 +12,4 @@ export const CaretUpDown = Icons.CaretUpDown;
 export const Check = Icons.Check;
 export const Copy = Icons.Copy;
 export const DotsThree = Icons.DotsThree;
+export const ArrowLeft = Icons.ArrowLeft;

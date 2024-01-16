@@ -7,22 +7,20 @@ import { useEditProfilesForm } from './hooks';
 export const EditProfilesForm = () => {
   const { onSubmit, ...form } = useEditProfilesForm();
   return (
-    <div className="grid place-content-center h-96">
-      <div className="w-80">
-        <Form {...form}>
-          <form onSubmit={onSubmit} className="space-y-8">
-            <FormItem>
-              <FormLabel>User Name</FormLabel>
-              <FormControl>
-                <Input placeholder="synske" {...form.register('user_name')} />
-              </FormControl>
-              <FormMessage>{form.formState.errors.user_name?.message}</FormMessage>
-            </FormItem>
+    <div className="h-96">
+      <Form {...form}>
+        <form onSubmit={onSubmit} className="space-y-4">
+          <FormItem>
+            <FormLabel>User Name</FormLabel>
+            <FormControl>
+              <Input placeholder="synsk" {...form.register('user_name')} />
+            </FormControl>
+            <FormMessage>{form.formState.errors.user_name?.message}</FormMessage>
+          </FormItem>
 
-            <Button type="submit">Save</Button>
-          </form>
-        </Form>
-      </div>
+          <Button type="submit">Save</Button>
+        </form>
+      </Form>
     </div>
   );
 };
