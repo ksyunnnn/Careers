@@ -17,6 +17,12 @@ type Props = {
   careerId?: string;
 };
 
+const printFrontMatterValue = (frontMatterValue: unknown) => {
+  /** @todo date format */
+  if (frontMatterValue instanceof Date) console.log(frontMatterValue);
+  return String(frontMatterValue);
+};
+
 export const EditCareerForm = ({ careerId, parallel = 'default' }: Props) => {
   const { register, frontMatter, body, errorByMatter } = useEditCareerForm(careerId);
 
@@ -114,13 +120,7 @@ export const EditCareerForm = ({ careerId, parallel = 'default' }: Props) => {
                   {Object.keys(frontMatter).map((key) => (
                     <div key={key}>
                       <div className="capitalize text-xs font-bold">{key}</div>
-                      <div className="text-sm">
-                        {(() => {
-                          /** @todo date format */
-                          if (frontMatter[key] instanceof Date) console.log(frontMatter[key]);
-                          return String(frontMatter[key]);
-                        })()}
-                      </div>
+                      <div className="text-sm">{printFrontMatterValue(frontMatter[key])}</div>
                     </div>
                   ))}
                 </div>
