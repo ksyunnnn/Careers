@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 
 const Layout = async ({
   children,
-  modal,
+  // modal,
 }: {
   children: React.ReactNode;
-  modal: React.ReactNode;
+  // modal: React.ReactNode;
 }) => {
   return (
     <html lang="en">
@@ -24,7 +24,7 @@ const Layout = async ({
         <div className="md:hidden">Mobile is not supported now 🙏</div>
         <div className="hidden md:block">
           {children}
-          {modal}
+          {/* {modal} */}
         </div>
         <Toaster />
         <SpeedInsights />
