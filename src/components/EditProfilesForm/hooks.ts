@@ -8,10 +8,9 @@ import { logger } from '@/lib/logger';
 import { createSupabaseClient } from '@/lib/supabaseClient';
 import { useToast } from '../ui/use-toast';
 import { createProfilesQuery, createProfilesUpdateQuery } from '@/query/createProfilesQuery';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { getSession } from '@/lib/session';
 import { useIsSubmitting } from '../useIsSubmitting';
-import { sleep } from '@/lib/sleep';
 const formId = 'dialog-login-form';
 
 type ReturnType = UseFormReturn<FormValues> & {
@@ -25,7 +24,6 @@ export const useEditProfilesForm = (): ReturnType => {
   const router = useRouter();
   const { toast } = useToast();
   const { isSubmitting, setIsSubmitting } = useIsSubmitting();
-  const [disabled, setDisabled] = useState(false);
 
   const supabase = createSupabaseClient();
 
