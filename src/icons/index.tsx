@@ -14,3 +14,7 @@ export const Copy = Icons.Copy;
 export const DotsThree = Icons.DotsThree;
 export const ArrowLeft = Icons.ArrowLeft;
 export const SmileyXEyes = Icons.SmileyXEyes;
+export const X = Icons.X;
+export const MagnifyingGlass = Icons.MagnifyingGlass;
+export const CaretRight = Icons.CaretRight;
+export const Circle = Icons.Circle;
