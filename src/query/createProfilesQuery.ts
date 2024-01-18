@@ -21,5 +21,7 @@ export const createProfilesUpdateQuery = async ({
   return client
     .from('profiles')
     .update(params)
-    .eq('id', session?.user.id || '');
+    .eq('id', session?.user.id || '')
+    .select('user_name')
+    .single();
 };

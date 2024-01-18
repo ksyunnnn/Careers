@@ -1,11 +1,11 @@
 'use client';
 import { Form, FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
+import { Input } from '@/components/ui/input';
 import { useEditProfilesForm } from './hooks';
+import { SubmitButton } from '../SubmitButton';
 
 export const EditProfilesForm = () => {
-  const { onSubmit, ...form } = useEditProfilesForm();
+  const { onSubmit, isSubmitting, disabled, ...form } = useEditProfilesForm();
   return (
     <div className="h-96">
       <Form {...form}>
@@ -18,7 +18,9 @@ export const EditProfilesForm = () => {
             <FormMessage>{form.formState.errors.user_name?.message}</FormMessage>
           </FormItem>
 
-          <Button type="submit">Save</Button>
+          <SubmitButton type="submit" disabled={disabled} isSubmitting={isSubmitting}>
+            Save
+          </SubmitButton>
         </form>
       </Form>
     </div>
