@@ -16,7 +16,6 @@ const formId = 'dialog-login-form';
 type ReturnType = UseFormReturn<FormValues> & {
   formId: string;
   onSubmit: (e?: React.BaseSyntheticEvent<object, unknown, unknown> | undefined) => Promise<void>;
-  isSubmitting: boolean;
   disabled: boolean;
 };
 
@@ -90,7 +89,6 @@ export const useEditProfilesForm = (): ReturnType => {
     formId,
     ...form,
     onSubmit,
-    isSubmitting,
-    disabled: !isDirty,
+    disabled: !isDirty || isSubmitting,
   };
 };

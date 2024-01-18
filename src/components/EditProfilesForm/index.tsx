@@ -2,10 +2,10 @@
 import { Form, FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useEditProfilesForm } from './hooks';
-import { SubmitButton } from '../SubmitButton';
+import { Button } from '@/components/ui/button';
 
 export const EditProfilesForm = () => {
-  const { onSubmit, isSubmitting, disabled, ...form } = useEditProfilesForm();
+  const { onSubmit, disabled, ...form } = useEditProfilesForm();
   return (
     <div className="h-96">
       <Form {...form}>
@@ -18,9 +18,9 @@ export const EditProfilesForm = () => {
             <FormMessage>{form.formState.errors.user_name?.message}</FormMessage>
           </FormItem>
 
-          <SubmitButton type="submit" disabled={disabled} isSubmitting={isSubmitting}>
+          <Button type="submit" disabled={disabled}>
             Save
-          </SubmitButton>
+          </Button>
         </form>
       </Form>
     </div>
