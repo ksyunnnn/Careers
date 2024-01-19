@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { UseFormReturn, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { formValuesSchema } from './schema';
 import { FormValues } from './types';
 
@@ -11,15 +11,10 @@ import { createProfilesQuery, createProfilesUpdateQuery } from '@/query/createPr
 import { useEffect } from 'react';
 import { getSession } from '@/lib/session';
 import { useIsSubmitting } from '../useIsSubmitting';
+import { FormReturn } from '@/types/form';
 const formId = 'dialog-login-form';
 
-type ReturnType = UseFormReturn<FormValues> & {
-  formId: string;
-  onSubmit: (e?: React.BaseSyntheticEvent<object, unknown, unknown> | undefined) => Promise<void>;
-  disabled: boolean;
-};
-
-export const useEditProfilesForm = (): ReturnType => {
+export const useEditProfilesForm = (): FormReturn<FormValues> => {
   const router = useRouter();
   const { toast } = useToast();
   const { isSubmitting, setIsSubmitting } = useIsSubmitting();

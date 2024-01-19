@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { UseFormReturn, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { formValuesSchema } from './schema';
 import { FormValues } from './types';
 
@@ -11,12 +11,12 @@ import { createSupabaseClient } from '@/lib/supabaseClient';
 import { useToast } from '../ui/use-toast';
 import { createInsertCareersQuery } from '@/query/createCareersQuery';
 import { useEffect, useState } from 'react';
+import { FormReturn } from '@/types/form';
+import { useIsSubmitting } from '../useIsSubmitting';
 
 const formId = 'edit-career-form';
 
-type ReturnType = UseFormReturn<FormValues> & {
-  formId: string;
-  onSubmit: (e?: React.BaseSyntheticEvent<object, unknown, unknown> | undefined) => Promise<void>;
+type ReturnType = FormReturn<FormValues> & {
   body: string;
   frontMatter: Record<string, unknown>;
   errorByMatter: string | null;
@@ -25,6 +25,7 @@ type ReturnType = UseFormReturn<FormValues> & {
 export const useEditCareerForm = (careerId?: string): ReturnType => {
   const router = useRouter();
   const { toast } = useToast();
+  const { isSubmitting, setIsSubmitting } = useIsSubmitting();
 
   const [body, setBody] = useState<ReturnType['body']>('');
   const [frontMatter, setFrontMatter] = useState<ReturnType['frontMatter']>({});
@@ -48,7 +49,11 @@ During my tenure as a Front-End Web Developer from January 1, 2022, to December 
     },
   });
 
-  const { handleSubmit, watch } = form;
+  const {
+    handleSubmit,
+    watch,
+    formState: { isDirty },
+  } = form;
 
   const onSubmit = handleSubmit(async (data) => {
     /**
@@ -56,17 +61,22 @@ During my tenure as a Front-End Web Developer from January 1, 2022, to December 
      * else, insert the career
      */
 
-    const { error } = await createInsertCareersQuery({ client: supabase });
-    if (error) {
-      logger.error('insert', { error });
-      return;
-    }
-    toast({
-      title: 'Awesome🎉',
-      description: 'You have successfully inserted a new career.',
-    });
+    try {
+      setIsSubmitting(true);
+      const { error } = await createInsertCareersQuery({ client: supabase });
+      if (error) {
+        logger.error('insert', { error });
+        return;
+      }
+      toast({
+        title: 'Awesome🎉',
+        description: 'You have successfully inserted a new career.',
+      });
 
-    router.refresh();
+      router.refresh();
+    } finally {
+      setIsSubmitting(false);
+    }
   });
 
   const contents = watch('contents');
@@ -90,5 +100,6 @@ During my tenure as a Front-End Web Developer from January 1, 2022, to December 
     body,
     frontMatter,
     errorByMatter,
+    disabled: !isDirty || isSubmitting,
   };
 };

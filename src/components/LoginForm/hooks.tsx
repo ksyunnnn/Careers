@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname, useRouter } from 'next/navigation';
-import { UseFormReturn, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { formValuesSchema } from './schema';
 import { FormValues } from './types';
 
@@ -11,13 +11,10 @@ import { useToast } from '../ui/use-toast';
 import { Route } from 'next';
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import { FormReturn } from '@/types/form';
+import { useIsSubmitting } from '../useIsSubmitting';
 
 const formId = 'dialog-login-form';
-
-type ReturnType = UseFormReturn<FormValues> & {
-  formId: string;
-  onSubmit: (e?: React.BaseSyntheticEvent<object, unknown, unknown> | undefined) => Promise<void>;
-};
 
 /** @see - https://github.com/ksyunnnn/Careers/issues/5 */
 const errorDescription = (
@@ -32,36 +29,53 @@ More details: `}
   </span>
 );
 
-export const useLoginForm = (): ReturnType => {
+export const useLoginForm = (): FormReturn<FormValues> => {
   const router = useRouter();
   const { toast } = useToast();
+  const { isSubmitting, setIsSubmitting } = useIsSubmitting();
+
   const pathname = usePathname() as Route;
 
   const supabase = createSupabaseClient();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formValuesSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
 
-  const { handleSubmit } = form;
+  const {
+    handleSubmit,
+    formState: { isDirty },
+  } = form;
 
   const onSubmit = handleSubmit(async (data) => {
-    const { error } = await signInWithPassword({ client: supabase, data });
-    if (error) {
-      logger.error('handleSignIn', { error });
-      return;
-    }
-    toast({
-      title: 'Welcome back🎉',
-      description: pathname === '/new' ? errorDescription : `You have successfully logged in.`,
-    });
+    try {
+      setIsSubmitting(true);
+      const { error } = await signInWithPassword({ client: supabase, data });
+      if (error) {
+        logger.error('handleSignIn', { error });
+        return;
+      }
+      toast({
+        title: 'Welcome back🎉',
+        description: pathname === '/new' ? errorDescription : `You have successfully logged in.`,
+      });
 
-    router.refresh();
+      router.refresh();
+    } finally {
+      setIsSubmitting(false);
+    }
   });
+
+  logger.debug('useLoginForm', { isDirty, isSubmitting });
 
   return {
     formId,
     ...form,
     onSubmit,
+    disabled: !isDirty || isSubmitting,
   };
 };

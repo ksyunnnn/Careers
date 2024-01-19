@@ -24,7 +24,7 @@ const printFrontMatterValue = (frontMatterValue: unknown) => {
 };
 
 export const EditCareerForm = ({ careerId, parallel = 'default' }: Props) => {
-  const { register, frontMatter, body, errorByMatter } = useEditCareerForm(careerId);
+  const { register, frontMatter, body, errorByMatter, disabled } = useEditCareerForm(careerId);
 
   return (
     <div className="hidden flex-col md:flex h-full">
@@ -37,7 +37,9 @@ export const EditCareerForm = ({ careerId, parallel = 'default' }: Props) => {
         <h2 className="text-lg font-semibold">Edit</h2>
         <div className="ml-auto flex w-full space-x-2 sm:justify-end">
           <PresetSelector />
-          <Button variant="secondary">Save</Button>
+          <Button variant="secondary" disabled={disabled}>
+            Save
+          </Button>
           <div className="hidden space-x-2 md:flex">
             <PresetShare />
           </div>
