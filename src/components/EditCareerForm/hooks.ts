@@ -16,6 +16,12 @@ import { useIsSubmitting } from '../useIsSubmitting';
 
 const formId = 'edit-career-form';
 
+const defaultContent = `---
+title: 
+start_date: 2022-01-01
+end_date: 2022-12-31
+---`;
+
 type ReturnType = FormReturn<FormValues> & {
   body: string;
   frontMatter: Record<string, unknown>;
@@ -36,16 +42,7 @@ export const useEditCareerForm = (careerId?: string): ReturnType => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formValuesSchema),
     defaultValues: {
-      contents: `---
-title: Front-End Web Developer
-skils: Nextjs, React, TypeScript, TailwindCSS
-start_date: 2022-01-01
-end_date: 2022-12-31
----
-As a seasoned Front-End Web Developer, I bring a wealth of experience and expertise in crafting dynamic and visually appealing user interfaces. My professional journey began on January 1, 2022, and throughout the year, I demonstrated proficiency in key technologies and frameworks, including Next.js, React, TypeScript, and TailwindCSS.
-
-During my tenure as a Front-End Web Developer from January 1, 2022, to December 31, 2022, I actively contributed to projects that demanded a keen eye for design, strong problem-solving skills, and a commitment to delivering high-quality user experiences. My ability to collaborate with cross-functional teams and adapt to evolving technologies positions me as a valuable asset for any forward-thinking organization seeking a skilled Front-End Web Developer.
-`,
+      contents: defaultContent,
     },
   });
 
