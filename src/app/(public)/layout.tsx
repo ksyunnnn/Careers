@@ -16,7 +16,9 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <div className="px-2 lg:px-4 min-h-header-height flex justify-between items-center">
-        <div className="font-bold">Career Shelf</div>
+        <div className="font-bold">
+          <Link href="/">Career Shelf</Link>
+        </div>
         {!session && (
           <DialogForLogin>
             <Button variant="ghost" size="sm">
