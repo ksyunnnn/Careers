@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { formValuesSchema } from './schema';
-import { FormValues } from './types';
+import { FormValues, ReturnType } from './types';
 
 import matter from 'gray-matter';
 
@@ -21,12 +21,6 @@ title:
 start_date: 2022-01-01
 end_date: 2022-12-31
 ---`;
-
-type ReturnType = FormReturn<FormValues> & {
-  body: string;
-  frontMatter: Record<string, unknown>;
-  errorByMatter: string | null;
-};
 
 export const useEditCareerForm = (careerId?: string): ReturnType => {
   const router = useRouter();

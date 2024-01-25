@@ -15,6 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Button } from '@/components/ui/button';
 import * as Icons from '@/icons';
 import { CAREER_BREAK, POSITION } from './const';
+import { useEditCareerFormContext } from '../../provider';
 
 interface Preset {
   id: string;
@@ -39,6 +40,7 @@ export const PresetSelector = () => {
   const [open, setOpen] = React.useState(false);
   const [selectedPreset, setSelectedPreset] = React.useState<Preset>();
   const router = useRouter();
+  const { setValue } = useEditCareerFormContext();
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -50,7 +52,7 @@ export const PresetSelector = () => {
           aria-expanded={open}
           className="flex-1 justify-between md:max-w-[200px] lg:max-w-[300px]"
         >
-          {selectedPreset ? selectedPreset.name : 'Load a preset...'}
+          Load a preset...
           <Icons.CaretUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -63,17 +65,11 @@ export const PresetSelector = () => {
               <CommandItem
                 key={preset.id}
                 onSelect={() => {
-                  setSelectedPreset(preset);
                   setOpen(false);
+                  setValue('contents', preset.content);
                 }}
               >
                 {preset.name}
-                <Icons.Check
-                  className={cn(
-                    'ml-auto h-4 w-4',
-                    selectedPreset?.id === preset.id ? 'opacity-100' : 'opacity-0'
-                  )}
-                />
               </CommandItem>
             ))}
           </CommandGroup>
