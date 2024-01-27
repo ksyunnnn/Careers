@@ -15,20 +15,40 @@ import { useIsSubmitting } from '../useIsSubmitting';
 
 const formId = 'edit-career-form';
 
+const useFrontMatter = (contents: string) => {
+  const [body, setBody] = useState<ReturnType['body']>('');
+  const [frontMatter, setFrontMatter] = useState<ReturnType['frontMatter']>({});
+  const [errorByMatter, setErrorByMatter] = useState<ReturnType['errorByMatter']>(null);
+  useEffect(() => {
+    try {
+      const { content: body, data: frontMatter } = matter(contents || '');
+      setErrorByMatter(null);
+      setBody(body);
+      setFrontMatter(frontMatter);
+    } catch (error: any) {
+      logger.error('matter', { error });
+      setErrorByMatter(error.reason);
+    }
+  }, [contents]);
+
+  return {
+    body,
+    frontMatter,
+    errorByMatter,
+  };
+};
+
 const defaultContent = `---
 title: 
 start_date: 2022-01-01
 end_date: 2022-12-31
 ---`;
 
-export const useEditCareerForm = (careerId?: string): ReturnType => {
+const useNewCareerForm = (): ReturnType => {
   const router = useRouter();
+
   const { toast } = useToast();
   const { isSubmitting, setIsSubmitting } = useIsSubmitting();
-
-  const [body, setBody] = useState<ReturnType['body']>('');
-  const [frontMatter, setFrontMatter] = useState<ReturnType['frontMatter']>({});
-  const [errorByMatter, setErrorByMatter] = useState<ReturnType['errorByMatter']>(null);
 
   const supabase = createSupabaseClient();
 
@@ -45,19 +65,23 @@ export const useEditCareerForm = (careerId?: string): ReturnType => {
     formState: { isDirty },
   } = form;
 
-  const onSubmit = handleSubmit(async (data) => {
-    /**
-     * if careerId is not undefined, update the career
-     * else, insert the career
-     */
+  const contents = watch('contents');
+  const frontMatterState = useFrontMatter(contents);
 
+  const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true);
-      const { error } = await createInsertCareersQuery({ client: supabase });
+      const { error } = await createInsertCareersQuery({
+        client: supabase,
+        params: {
+          contents: data.contents,
+        },
+      });
       if (error) {
         logger.error('insert', { error });
         return;
       }
+
       toast({
         title: 'Awesome🎉',
         description: 'You have successfully inserted a new career.',
@@ -69,27 +93,75 @@ export const useEditCareerForm = (careerId?: string): ReturnType => {
     }
   });
 
-  const contents = watch('contents');
+  return {
+    formId,
+    ...form,
+    onSubmit,
+    disabled: !isDirty || isSubmitting,
+    ...frontMatterState,
+  };
+};
 
-  useEffect(() => {
+const useEditCareerForm = (careerId: string): ReturnType => {
+  const router = useRouter();
+  const { toast } = useToast();
+  const { isSubmitting, setIsSubmitting } = useIsSubmitting();
+
+  const supabase = createSupabaseClient();
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formValuesSchema),
+    defaultValues: {
+      contents: defaultContent,
+    },
+  });
+
+  const {
+    handleSubmit,
+    watch,
+    formState: { isDirty },
+  } = form;
+
+  const contents = watch('contents');
+  const frontMatterState = useFrontMatter(contents);
+
+  const onSubmit = handleSubmit(async (data) => {
+    /**
+     * if careerId is not undefined, update the career
+     * else, insert the career
+     */
+    logger.debug('onSubmit', { data });
+
     try {
-      const { content: body, data: frontMatter } = matter(contents || '');
-      setErrorByMatter(null);
-      setBody(body);
-      setFrontMatter(frontMatter);
-    } catch (error: any) {
-      logger.error('matter', { error });
-      setErrorByMatter(error.reason);
+      setIsSubmitting(true);
+      const { error } = await createInsertCareersQuery({
+        client: supabase,
+        params: {
+          contents: data.contents,
+        },
+      });
+      if (error) {
+        logger.error('update', { error });
+        return;
+      }
+      toast({
+        title: 'Awesome🎉',
+        description: 'You have successfully updated your career.',
+      });
+
+      router.refresh();
+    } finally {
+      setIsSubmitting(false);
     }
-  }, [contents]);
+  });
 
   return {
     formId,
     ...form,
     onSubmit,
-    body,
-    frontMatter,
-    errorByMatter,
     disabled: !isDirty || isSubmitting,
+    ...frontMatterState,
   };
 };
+
+export { useNewCareerForm, useEditCareerForm };

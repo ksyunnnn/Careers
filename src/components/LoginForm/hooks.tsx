@@ -70,8 +70,6 @@ export const useLoginForm = (): FormReturn<FormValues> => {
     }
   });
 
-  logger.debug('useLoginForm', { isDirty, isSubmitting });
-
   return {
     formId,
     ...form,

@@ -38,7 +38,6 @@ const presets: Preset[] = [
 
 export const PresetSelector = () => {
   const [open, setOpen] = React.useState(false);
-  const [selectedPreset, setSelectedPreset] = React.useState<Preset>();
   const router = useRouter();
   const { setValue } = useEditCareerFormContext();
 
@@ -66,7 +65,7 @@ export const PresetSelector = () => {
                 key={preset.id}
                 onSelect={() => {
                   setOpen(false);
-                  setValue('contents', preset.content);
+                  setValue('contents', preset.content, { shouldDirty: true });
                 }}
               >
                 {preset.name}

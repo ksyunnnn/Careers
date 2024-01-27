@@ -13,28 +13,28 @@ export interface Database {
         Row: {
           contents: string
           created_at: string
-          created_by: string
+          created_by_user_id: string
           id: number
           updated_at: string
         }
         Insert: {
           contents: string
           created_at?: string
-          created_by: string
+          created_by_user_id: string
           id?: number
           updated_at?: string
         }
         Update: {
           contents?: string
           created_at?: string
-          created_by?: string
+          created_by_user_id?: string
           id?: number
           updated_at?: string
         }
         Relationships: [
           {
-            foreignKeyName: "careers_created_by_fkey"
-            columns: ["created_by"]
+            foreignKeyName: "careers_created_by_user_id_fkey"
+            columns: ["created_by_user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
