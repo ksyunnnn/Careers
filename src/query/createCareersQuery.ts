@@ -35,4 +35,17 @@ const createUpdateCareersQuery = async ({
   });
 };
 
-export { createInsertCareersQuery, createUpdateCareersQuery };
+const createSelectCareersQuery = async ({
+  client,
+  query,
+}: {
+  client: SupabaseClient<Database>;
+  query?: unknown /** @todo */;
+}) => {
+  const session = await getSession({ client });
+  if (!session) throw new Error('session is null');
+
+  return client.from('careers').select('*').eq('created_by_user_id', session.user.id);
+};
+
+export { createInsertCareersQuery, createUpdateCareersQuery, createSelectCareersQuery };

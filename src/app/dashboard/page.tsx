@@ -6,6 +6,7 @@ import * as Icons from '@/icons';
 
 import { EmptyPlaceholder } from '@/components/EmptyPlaceholder';
 import Link from 'next/link';
+import { ListCareer } from '@/components/ListCareer';
 
 export const runtime = 'edge';
 
@@ -40,7 +41,9 @@ const Page = () => {
             <Separator className="my-4" />
             <div className="relative">
               <ScrollArea>
-                <div className="flex space-x-4 pb-4"></div>
+                <div className="flex space-x-4 pb-4">
+                  <ListCareer />
+                </div>
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
             </div>

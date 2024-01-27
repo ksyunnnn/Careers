@@ -88,6 +88,7 @@ const useNewCareerForm = (): ReturnType => {
       });
 
       router.refresh();
+      router.push('/dashboard');
     } finally {
       setIsSubmitting(false);
     }
