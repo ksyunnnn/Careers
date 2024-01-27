@@ -11,7 +11,6 @@ import { createSupabaseClient } from '@/lib/supabaseClient';
 import { useToast } from '../ui/use-toast';
 import { createInsertCareersQuery } from '@/query/createCareersQuery';
 import { useEffect, useState } from 'react';
-import { FormReturn } from '@/types/form';
 import { useIsSubmitting } from '../useIsSubmitting';
 
 const formId = 'edit-career-form';

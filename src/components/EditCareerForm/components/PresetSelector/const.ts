@@ -1,8 +1,10 @@
 export const POSITION = `---
 title: Front-End Web Developer
 skils: Nextjs, React, TypeScript, TailwindCSS
+company: Freelance
 start_date: 2022-01-01
-end_date: 2022-12-31
+end_date: null,
+currently_work_here: true
 ---
 As a seasoned Front-End Web Developer, I bring a wealth of experience and expertise in crafting dynamic and visually appealing user interfaces. My professional journey began on January 1, 2022, and throughout the year, I demonstrated proficiency in key technologies and frameworks, including Next.js, React, TypeScript, and TailwindCSS.
 
