@@ -15,7 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Button } from '@/components/ui/button';
 import * as Icons from '@/icons';
 import { CAREER_BREAK, POSITION } from './const';
-import { useEditCareerFormContext } from '../../provider';
+import { useEditOrNewCareerFormContext } from '../../provider';
 
 interface Preset {
   id: string;
@@ -39,7 +39,7 @@ const presets: Preset[] = [
 export const PresetSelector = () => {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
-  const { setValue } = useEditCareerFormContext();
+  const { setValue } = useEditOrNewCareerFormContext();
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

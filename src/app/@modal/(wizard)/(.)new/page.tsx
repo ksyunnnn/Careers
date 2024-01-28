@@ -1,4 +1,4 @@
-import { EditCareerForm } from '@/components/EditCareerForm';
+import { EditCareerForm } from '@/components/EditOrNewCareerForm';
 import { Modal } from '@/components/Modal';
 
 const Page = () => {

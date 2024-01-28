@@ -1,6 +1,6 @@
 'use client';
 import { PresetActions } from '@/components/PresetActions';
-import { PresetSelector } from '@/components/EditCareerForm/components/PresetSelector';
+import { PresetSelector } from '@/components/EditOrNewCareerForm/components/PresetSelector';
 import { PresetShare } from '@/components/PresetShare';
 import { Textviewer } from '@/components/Textviewer';
 import { Button } from '@/components/ui/button';
@@ -9,9 +9,9 @@ import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
-import { useEditCareerForm, useNewCareerForm } from './hooks';
+import { useNewCareerForm } from './hooks';
 import { Parallel } from '@/types/globals';
-import { EditCareerFormProvider } from './provider';
+import { EditOrNewCareerFormProvider } from './provider';
 
 type Props = {
   parallel?: Parallel;
@@ -24,12 +24,12 @@ const printFrontMatterValue = (frontMatterValue: unknown) => {
   return String(frontMatterValue);
 };
 
-export const EditCareerForm = ({ careerId, parallel = 'default' }: Props) => {
+export const EditOrNewCareerForm = ({ careerId, parallel = 'default' }: Props) => {
   const methods = useNewCareerForm();
   const { register, frontMatter, body, errorByMatter, disabled, onSubmit, formId } = methods;
 
   return (
-    <EditCareerFormProvider {...methods}>
+    <EditOrNewCareerFormProvider {...methods}>
       <div className="hidden flex-col md:flex h-full">
         <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
           {parallel === 'default' && (
@@ -212,6 +212,6 @@ export const EditCareerForm = ({ careerId, parallel = 'default' }: Props) => {
           </div>
         </Tabs>
       </div>
-    </EditCareerFormProvider>
+    </EditOrNewCareerFormProvider>
   );
 };

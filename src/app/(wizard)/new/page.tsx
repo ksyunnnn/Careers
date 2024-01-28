@@ -1,11 +1,11 @@
-import { EditCareerForm } from '@/components/EditCareerForm';
+import { EditOrNewCareerForm } from '@/components/EditOrNewCareerForm';
 
 export const runtime = 'edge';
 
 const CareerPage = () => {
   return (
     <div className="h-[100vh]">
-      <EditCareerForm />
+      <EditOrNewCareerForm />
     </div>
   );
 };
