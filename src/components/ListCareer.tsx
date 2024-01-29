@@ -43,9 +43,9 @@ export const ListCareer = async () => {
               <CardTitle>{frontMatter.title || '--'}</CardTitle>
               <CardDescription>{`${career.updated_at} updated.`}</CardDescription>
             </CardHeader>
-            <CardContent>{`${body.substring(0, 80)}${body.length > 80 && '...'}`}</CardContent>
+            <CardContent>{`${body.substring(0, 80)}${body.length > 80 ? '...' : ''}`}</CardContent>
             <CardFooter>
-              <Button>
+              <Button asChild>
                 {/** @todo open palallel modal */}
                 <Link href={`/${String(career.id)}/edit`}>Edit</Link>
               </Button>
