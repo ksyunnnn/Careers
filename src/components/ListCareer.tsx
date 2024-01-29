@@ -47,7 +47,7 @@ export const ListCareer = async () => {
             <CardFooter>
               <Button asChild>
                 {/** @todo open palallel modal */}
-                <Link href={`/${String(career.id)}/edit`}>Edit</Link>
+                <Link href={`/edit/${String(career.id)}`}>Edit</Link>
               </Button>
             </CardFooter>
           </Card>
