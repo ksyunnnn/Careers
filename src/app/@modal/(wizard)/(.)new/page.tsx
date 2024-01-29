@@ -1,6 +1,8 @@
 import { EditOrNewCareerForm } from '@/components/EditOrNewCareerForm';
 import { Modal } from '@/components/Modal';
 
+export const runtime = 'edge';
+
 const Page = () => {
   return (
     <Modal>
