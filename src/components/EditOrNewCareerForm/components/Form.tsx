@@ -2,14 +2,17 @@ import { Textviewer } from '@/components/Textviewer';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
-import { useNewCareerForm, useEditCareerForm } from '../hooks';
 import { Parallel } from '@/types/globals';
 import { EditOrNewCareerFormProvider } from '../provider';
 import { Header } from './Header';
 import { SideNav } from './SIdeNav';
 import { useFrontMatterStore } from '../store';
 import { TABS } from '../const';
+import { ReturnType } from '../types';
 
+/**
+ * Form's root component.
+ */
 export const Form = ({
   parallel = 'default',
   isEdit = false,
@@ -17,7 +20,7 @@ export const Form = ({
 }: {
   parallel?: Parallel;
   isEdit?: boolean;
-  methods: ReturnType<typeof useNewCareerForm> | ReturnType<typeof useEditCareerForm>;
+  methods: ReturnType;
 }) => {
   const { disabled, formId, onSubmit, register } = methods;
   const { errorByMatter, body } = useFrontMatterStore();
