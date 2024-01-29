@@ -8,6 +8,7 @@ type Context = {
 };
 
 const Page = ({ params }: Context) => {
+  console.log('debug', { params });
   return (
     <Modal>
       <div className="h-[92vh]">
