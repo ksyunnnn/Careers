@@ -1,4 +1,5 @@
 'use client';
+<<<<<<< Updated upstream
 import { PresetActions } from '@/components/PresetActions';
 import { PresetSelector } from '@/components/EditOrNewCareerForm/components/PresetSelector';
 import { PresetShare } from '@/components/PresetShare';
@@ -14,6 +15,29 @@ import { Parallel } from '@/types/globals';
 import { EditOrNewCareerFormProvider } from './provider';
 import { Header } from './components/Header';
 import { SideNav } from './components/SIdeNav';
+=======
+import { useNewCareerForm, useEditCareerForm } from './hooks';
+import { Parallel } from '@/types/globals';
+import { Form } from './components/Form';
+
+const NewCareerForm = ({ parallel = 'default' }: { parallel?: Parallel }) => {
+  const methods = useNewCareerForm();
+
+  return <Form methods={methods} parallel={parallel} />;
+};
+
+const EditCareerForm = ({
+  parallel = 'default',
+  careerId,
+}: {
+  parallel?: Parallel;
+  careerId: string;
+}) => {
+  const methods = useEditCareerForm(careerId);
+
+  return <Form methods={methods} parallel={parallel} isEdit />;
+};
+>>>>>>> Stashed changes
 
 type Props = {
   parallel?: Parallel;
