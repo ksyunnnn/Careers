@@ -1,6 +1,9 @@
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
 import { Label } from '@/components/ui/label';
+import { TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { TABS } from '../const';
+import { useFrontMatterStore } from '../store';
 
 const printFrontMatterValue = (frontMatterValue: unknown) => {
   /** @todo date format */
@@ -9,19 +12,25 @@ const printFrontMatterValue = (frontMatterValue: unknown) => {
 };
 
 type Props = {
-  tabsList: React.ReactNode;
-  frontMatter: Record<string, unknown>;
-  isEdit?: boolean;
+  isEdit: boolean;
 };
 
-export const SideNav = ({ tabsList, frontMatter, isEdit }: Props) => {
+export const SideNav = ({ isEdit = false }: Props) => {
+  const { frontMatter } = useFrontMatterStore();
   return (
     <div className="hidden flex-col space-y-4 sm:flex md:order-2">
       <div className="grid gap-2">
         <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
           Mode
         </span>
-        {tabsList}
+        <TabsList className="grid grid-cols-2">
+          <TabsTrigger value={TABS.edit} className="capitalize">
+            {TABS.edit}
+          </TabsTrigger>
+          <TabsTrigger value={TABS.preview} className="capitalize">
+            {TABS.preview}
+          </TabsTrigger>
+        </TabsList>
       </div>
       <div className="grid gap-2">
         <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
