@@ -41,7 +41,7 @@ export const ListCareer = async () => {
           <Card key={career.id} className="w-64">
             <CardHeader>
               <CardTitle>{frontMatter.title || '--'}</CardTitle>
-              <CardDescription>{`${career.updated_at} updated.`}</CardDescription>
+              <CardDescription>{`${frontMatter.company || '??'} - ${career.updated_at} updated.`}</CardDescription>
             </CardHeader>
             <CardContent>{`${body.substring(0, 80)}${body.length > 80 ? '...' : ''}`}</CardContent>
             <CardFooter>
