@@ -45,7 +45,12 @@ const createSelectCareersQuery = async ({
   const session = await getSession({ client });
   if (!session) throw new Error('session is null');
 
-  return () => client.from('careers').select('*').eq('created_by_user_id', session.user.id);
+  return () =>
+    client
+      .from('careers')
+      .select('*')
+      .eq('created_by_user_id', session.user.id)
+      .order('created_at', { ascending: true });
 };
 
 export { createInsertCareersQuery, createUpdateCareersQuery, createSelectCareersQuery };
