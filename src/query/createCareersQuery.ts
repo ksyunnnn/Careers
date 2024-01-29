@@ -21,18 +21,18 @@ const createInsertCareersQuery = async ({
 const createUpdateCareersQuery = async ({
   client,
   params,
+  careerId,
 }: {
   client: SupabaseClient<Database>;
   params: Pick<TablesUpdate<'careers'>, 'contents'>;
+  careerId: string;
 }) => {
-  const session = await getSession({ client });
-  if (!session) throw new Error('session is null');
-
-  /** it mignt not be working */
-  return client.from('careers').update({
-    ...params,
-    created_by_user_id: session.user.id,
-  });
+  return client
+    .from('careers')
+    .update({
+      ...params,
+    })
+    .eq('id', careerId);
 };
 
 const createSelectCareersQuery = async ({
@@ -45,7 +45,7 @@ const createSelectCareersQuery = async ({
   const session = await getSession({ client });
   if (!session) throw new Error('session is null');
 
-  return client.from('careers').select('*').eq('created_by_user_id', session.user.id);
+  return () => client.from('careers').select('*').eq('created_by_user_id', session.user.id);
 };
 
 export { createInsertCareersQuery, createUpdateCareersQuery, createSelectCareersQuery };

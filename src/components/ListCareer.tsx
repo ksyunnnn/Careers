@@ -14,7 +14,8 @@ import Link from 'next/link';
 
 export const ListCareer = async () => {
   const supabase = createSupabaseServerClient();
-  const { data, error } = await createSelectCareersQuery({ client: supabase });
+  const query = await createSelectCareersQuery({ client: supabase });
+  const { data, error } = await query();
 
   if (error) {
     throw error;

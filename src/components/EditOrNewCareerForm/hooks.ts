@@ -9,8 +9,12 @@ import matter from 'gray-matter';
 import { logger } from '@/lib/logger';
 import { createSupabaseClient } from '@/lib/supabaseClient';
 import { useToast } from '../ui/use-toast';
-import { createInsertCareersQuery } from '@/query/createCareersQuery';
-import { useEffect, useState } from 'react';
+import {
+  createInsertCareersQuery,
+  createSelectCareersQuery,
+  createUpdateCareersQuery,
+} from '@/query/createCareersQuery';
+import { useEffect } from 'react';
 import { useIsSubmitting } from '../useIsSubmitting';
 import { useFrontMatterStore } from './store';
 
@@ -115,26 +119,42 @@ const useEditCareerForm = (careerId: string): ReturnType => {
     handleSubmit,
     watch,
     formState: { isDirty },
+    reset,
   } = form;
+
+  useEffect(() => {
+    const fetchCareer = async () => {
+      const query = await createSelectCareersQuery({ client: supabase });
+      const { data, error } = await query().eq('id', careerId).maybeSingle();
+
+      if (error) {
+        logger.error('fetch', { error });
+        return;
+      }
+      if (!data) {
+        logger.error('fetch', { error: 'data is null' });
+        return;
+      }
+      reset({
+        contents: data.contents,
+      });
+    };
+    fetchCareer();
+  }, [careerId, reset, supabase]);
 
   const contents = watch('contents');
 
   useFrontMatter(contents);
 
   const onSubmit = handleSubmit(async (data) => {
-    /**
-     * if careerId is not undefined, update the career
-     * else, insert the career
-     */
-    logger.debug('onSubmit', { data });
-
     try {
       setIsSubmitting(true);
-      const { error } = await createInsertCareersQuery({
+      const { error } = await createUpdateCareersQuery({
         client: supabase,
         params: {
           contents: data.contents,
         },
+        careerId,
       });
       if (error) {
         logger.error('update', { error });
