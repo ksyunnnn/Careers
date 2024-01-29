@@ -12,30 +12,24 @@ import { useToast } from '../ui/use-toast';
 import { createInsertCareersQuery } from '@/query/createCareersQuery';
 import { useEffect, useState } from 'react';
 import { useIsSubmitting } from '../useIsSubmitting';
+import { useFrontMatterStore } from './store';
 
 const formId = 'edit-career-form';
 
 const useFrontMatter = (contents: string) => {
-  const [body, setBody] = useState<ReturnType['body']>('');
-  const [frontMatter, setFrontMatter] = useState<ReturnType['frontMatter']>({});
-  const [errorByMatter, setErrorByMatter] = useState<ReturnType['errorByMatter']>(null);
+  const { updateBody, updateErrorByMatter, updateFrontMatter } = useFrontMatterStore();
+
   useEffect(() => {
     try {
       const { content: body, data: frontMatter } = matter(contents || '');
-      setErrorByMatter(null);
-      setBody(body);
-      setFrontMatter(frontMatter);
+      updateErrorByMatter(null);
+      updateBody(body);
+      updateFrontMatter(frontMatter);
     } catch (error: any) {
       logger.error('matter', { error });
-      setErrorByMatter(error.reason);
+      updateErrorByMatter(error.reason);
     }
-  }, [contents]);
-
-  return {
-    body,
-    frontMatter,
-    errorByMatter,
-  };
+  }, [contents, updateBody, updateErrorByMatter, updateFrontMatter]);
 };
 
 const defaultContent = `---
@@ -66,7 +60,8 @@ const useNewCareerForm = (): ReturnType => {
   } = form;
 
   const contents = watch('contents');
-  const frontMatterState = useFrontMatter(contents);
+
+  useFrontMatter(contents);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -99,7 +94,6 @@ const useNewCareerForm = (): ReturnType => {
     ...form,
     onSubmit,
     disabled: !isDirty || isSubmitting,
-    ...frontMatterState,
   };
 };
 
@@ -124,7 +118,8 @@ const useEditCareerForm = (careerId: string): ReturnType => {
   } = form;
 
   const contents = watch('contents');
-  const frontMatterState = useFrontMatter(contents);
+
+  useFrontMatter(contents);
 
   const onSubmit = handleSubmit(async (data) => {
     /**
@@ -161,7 +156,6 @@ const useEditCareerForm = (careerId: string): ReturnType => {
     ...form,
     onSubmit,
     disabled: !isDirty || isSubmitting,
-    ...frontMatterState,
   };
 };
 
