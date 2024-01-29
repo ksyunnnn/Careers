@@ -24,7 +24,7 @@ export const Form = ({
 
   return (
     <EditOrNewCareerFormProvider {...methods}>
-      <Header parallel={parallel} disabled={disabled} formId={formId} />
+      <Header parallel={parallel} disabled={disabled} formId={formId} isEdit={isEdit} />
       <Separator />
 
       {errorByMatter && <div>{errorByMatter}</div>}

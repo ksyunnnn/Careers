@@ -7,11 +7,12 @@ import { Parallel } from '@/types/globals';
 
 type Props = {
   parallel?: Parallel;
+  isEdit?: boolean;
   disabled?: boolean;
   formId: string;
 };
 
-export const Header = ({ parallel = 'default', disabled = false, formId }: Props) => {
+export const Header = ({ parallel = 'default', isEdit, disabled = false, formId }: Props) => {
   return (
     <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
       {parallel === 'default' && (
@@ -19,7 +20,7 @@ export const Header = ({ parallel = 'default', disabled = false, formId }: Props
           <Link href="/dashboard">back</Link>
         </Button>
       )}
-      <h2 className="text-lg font-semibold">Edit</h2>
+      <h2 className="text-lg font-semibold">{isEdit ? 'Edit' : 'New'}</h2>
       <div className="ml-auto flex w-full space-x-2 sm:justify-end">
         <PresetSelector />
         <Button variant="secondary" disabled={disabled} form={formId}>
