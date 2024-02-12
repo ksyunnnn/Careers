@@ -19,3 +19,4 @@ export const MagnifyingGlass = Icons.MagnifyingGlass;
 export const CaretRight = Icons.CaretRight;
 export const Circle = Icons.Circle;
 export const Barricade = Icons.Barricade;
+export const Coffee = Icons.Coffee;
