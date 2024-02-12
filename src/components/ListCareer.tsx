@@ -8,9 +8,9 @@ import {
 } from '@/components/ui/card';
 import { createSupabaseServerClient } from '@/lib/supabaseServerClient';
 import { createSelectCareersQuery } from '@/query/createCareersQuery';
-import matter from 'gray-matter';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { getMatter } from '@/lib/getMatter';
 
 export const ListCareer = async () => {
   const supabase = createSupabaseServerClient();
@@ -24,14 +24,6 @@ export const ListCareer = async () => {
   if (!data) {
     return 'Loading...';
   }
-
-  const getMatter = (content: string) => {
-    const { content: body, data: frontMatter } = matter(content || '');
-    return {
-      body,
-      frontMatter,
-    };
-  };
 
   return (
     <>
