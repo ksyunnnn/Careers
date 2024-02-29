@@ -3,7 +3,6 @@ import { getSession } from '@/lib/session';
 import { Sidebar } from '@/components/Sidebar';
 import { EmptySessionPage } from '@/components/EmptySessionPage';
 import { Menubar } from '@/components/ui/menubar';
-import { MenubarLogo } from '@/components/MenubarLogo';
 import { MenubarAfterLogin } from '@/components/MenubarAfterLogin';
 import Link from 'next/link';
 
