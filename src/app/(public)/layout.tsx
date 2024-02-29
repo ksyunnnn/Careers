@@ -15,7 +15,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <div className="px-2 lg:px-4 min-h-header-height flex justify-between items-center">
+      <div className="px-2 lg:px-4 min-h-header-height flex justify-between items-center fixed w-full">
         <div className="font-bold">
           <Link href="/">Career Shelf</Link>
         </div>
@@ -32,7 +32,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
           </Button>
         )}
       </div>
-      {children}
+      <div className="pt-header-height">{children}</div>
     </>
   );
 };

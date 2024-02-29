@@ -14,7 +14,9 @@ export const MenubarLogo = () => {
     <MenubarMenu>
       <MenubarTrigger className="font-bold">Career Shelf</MenubarTrigger>
       <MenubarContent>
-        <MenubarItem>About Career Shelf</MenubarItem>
+        <MenubarItem>
+          <Link href={'/about'}>About Career Shelf</Link>
+        </MenubarItem>
         <MenubarSeparator />
         <MenubarItem asChild>
           <Link href={'/dashboard'}>Dashboard</Link>
